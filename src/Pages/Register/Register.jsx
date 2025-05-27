@@ -9,14 +9,14 @@ const Register = () => {
     <div className="bg-base-200">
       <div className="max-w-screen-2xl w-11/12 mx-auto place-items-center py-10">
         <div>
-          <form className="fieldset border-base-300 rounded-box w-xs border md:text-base p-4 *:focus:outline-none *:border-none">
-            <h3 className="text-2xl md:text-4xl text-center">Register</h3>
+          <form className="fieldset border-base-300 rounded-box w-xs md:w-md border md:text-base p-4 *:focus:outline-none *:border-none ">
+            <h3 className="text-2xl md:text-4xl text-center font-semibold">Register</h3>
             <label>Name</label>
             <input
               type="text"
               name="name"
               required
-              className="input rounded-lg "
+              className="input rounded-lg w-full "
               placeholder="Enter your name"
             />
 
@@ -25,7 +25,7 @@ const Register = () => {
               type="text"
               name="PhotoUrl"
               required
-              className="input rounded-lg"
+              className="input rounded-lg w-full"
               placeholder="Your photo link"
             />
 
@@ -34,7 +34,7 @@ const Register = () => {
               type="email"
               name="email"
               required
-              className="input  rounded-lg"
+              className="input rounded-lg w-full"
               placeholder="example@gmail.com"
             />
 
@@ -44,7 +44,7 @@ const Register = () => {
                 type={showPassword ? "text" : "password" }
                 name="password"
                 required
-                className="input rounded-lg border-none focus:outline-none"
+                className="input rounded-lg border-none focus:outline-none w-full"
                 placeholder="**********"
               />
               <div onClick={()=>setShowPassword((prev)=> !prev)} className="absolute top-[13px] right-6">
@@ -54,7 +54,7 @@ const Register = () => {
 
             <input
               type="submit"
-              className=" md:text-base btn btn-primary"
+              className=" md:text-base mt-1 btn btn-primary"
               value="Register"
             />
           </form>

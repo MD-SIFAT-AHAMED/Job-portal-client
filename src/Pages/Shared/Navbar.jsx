@@ -62,7 +62,7 @@ const Navbar = () => {
         <div className="navbar-end">
           <div className="space-x-2 font-semibold">
             <Link to={'/register'} className="border px-3 py-1 rounded-full">Register</Link>
-            <Link to={'/register'} className="border px-3 py-1 rounded-full">Sign in</Link>
+            <Link to={'/signIn'} className="border px-3 py-1 rounded-full">Sign in</Link>
           </div>
         </div>
       </div>
