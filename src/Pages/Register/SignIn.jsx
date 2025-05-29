@@ -1,7 +1,7 @@
 import React, { use, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import AuthContext from "../../Context/AuthContext";
 import toast from "react-hot-toast";
 
@@ -9,6 +9,7 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const {signInWithEmail,signInWithGoogle}=use(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handlerSubmit=(e)=>{
     e.preventDefault();
@@ -18,7 +19,7 @@ const SignIn = () => {
     signInWithEmail(email,password)
     .then(()=>{
       toast.success("SignIn Successfully");
-      navigate('/');
+      navigate(location?.state || '/');
     })
     .catch((err)=>{
       toast.error(err.code);
@@ -28,7 +29,7 @@ const SignIn = () => {
     signInWithGoogle()
       .then(() => {
         toast.success("Login Successfully");
-        navigate('/');
+        navigate(location?.state || '/');
       })
       .catch((err) => {
         toast.error(err.code);

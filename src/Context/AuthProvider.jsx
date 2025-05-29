@@ -13,20 +13,26 @@ import { GoogleAuthProvider } from "firebase/auth";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  console.log(user);
 
   //User create Email and password
   const createUserWithEmail = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   //User SignIn with Email and password
   const signInWithEmail = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   //Sign in with Google
   const provider = new GoogleAuthProvider();
   const signInWithGoogle = () => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
@@ -39,17 +45,21 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscriber = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      return () => unSubscriber();
+      setLoading(false);
     });
-  },[]);
+    return () => unSubscriber();
+  }, []);
 
   //Sign Out
   const userSignOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
   const userInfo = {
     user,
+    loading,
+    setLoading,
     createUserWithEmail,
     signInWithEmail,
     signInWithGoogle,

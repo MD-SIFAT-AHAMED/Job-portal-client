@@ -1,7 +1,25 @@
-import React from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
+import AuthContext from "../../Context/AuthContext";
+import Loading from "./Loading";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, loading, userSignOut } = use(AuthContext);
+  console.log(loading)
+ if (loading)
+ {
+  return <div>User Loading</div>
+ }
+  const handlerSignOut = () => {
+    userSignOut()
+      .then(() => {
+        toast.success("SignOut Succesfully");
+      })
+      .catch((err) => {
+        toast.error(err.code);
+      });
+  };
   const links = (
     <>
       <NavLink to={"/"}>
@@ -60,10 +78,23 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="space-x-2 font-semibold">
-            <Link to={'/register'} className="border px-3 py-1 rounded-full">Register</Link>
-            <Link to={'/signIn'} className="border px-3 py-1 rounded-full">Sign in</Link>
-          </div>
+          {user ? (
+            <div
+              onClick={handlerSignOut}
+              className="border px-3 py-1 rounded-full font-semibold cursor-pointer"
+            >
+              Sign Out
+            </div>
+          ) : (
+            <div className="space-x-2 font-semibold">
+              <Link to={"/register"} className="border px-3 py-1 rounded-full">
+                Register
+              </Link>
+              <Link to={"/signIn"} className="border px-3 py-1 rounded-full">
+                Sign in
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

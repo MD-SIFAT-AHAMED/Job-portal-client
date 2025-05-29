@@ -1,15 +1,20 @@
 import React, { use, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import { Link, Navigate, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import AuthContext from "../../Context/AuthContext";
 import toast from "react-hot-toast";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { createUserWithEmail, UserUpdateProfile, signInWithGoogle } =
-    use(AuthContext);
-    const navigate = useNavigate();
+  const {
+    createUserWithEmail,
+    setLoading,
+    UserUpdateProfile,
+    signInWithGoogle,
+  } = use(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -31,13 +36,15 @@ const Register = () => {
         UserUpdateProfile(UpdateUserData)
           .then(() => {
             toast.success("Register Successfully");
-            navigate('/');
+            navigate(location?.state || "/");
           })
           .catch((err) => {
+            setLoading(false);
             toast.error(err.code);
           });
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err.code);
       });
   };
@@ -46,7 +53,7 @@ const Register = () => {
     signInWithGoogle()
       .then(() => {
         toast.success("Login Successfully");
-        navigate('/');
+        navigate(location?.state || "/");
       })
       .catch((err) => {
         toast.error(err.code);
