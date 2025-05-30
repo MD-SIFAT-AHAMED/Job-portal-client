@@ -25,7 +25,7 @@ const JobDetails = () => {
           <h2 className="card-title">{title}</h2>
           <p className="flex-grow">{description}</p>
           <div className="card-actions justify-end ">
-            <Link to={`/jobDetails/${_id}`}>
+            <Link to={`/jobApply/${_id}`}>
               <button className="btn btn-primary">Apply</button>
             </Link>
           </div>

@@ -5,8 +5,8 @@ import Register from "../Pages/Register/Register";
 import SignIn from "../Pages/Register/SignIn";
 import ForgotPassword from "../Pages/Register/ForgotPassword";
 import JobDetails from "../Pages/Shared/JobDetails";
-import { param } from "motion/react-m";
 import PrivateRoute from "../Routes/PrivateRoute";
+import JobApply from "../Pages/JobApply/JobApply";
 
 
 const router = createBrowserRouter([
@@ -36,6 +36,12 @@ const router = createBrowserRouter([
         loader:({params})=> fetch(`http://localhost:5000/jobs/${params.id}`),
         element:<PrivateRoute>
           <JobDetails/>
+        </PrivateRoute>
+      },
+      {
+        path:'/jobApply/:id',
+        element:<PrivateRoute>
+          <JobApply/>
         </PrivateRoute>
       }
     ],
