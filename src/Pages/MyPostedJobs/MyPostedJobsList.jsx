@@ -12,9 +12,9 @@ const MyPostedJobsList = ({ myPostedJobPromise }) => {
           <thead>
             <tr>
               <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Job Title</th>
+              <th>Deadline</th>
+              <th>View Applications</th>
             </tr>
           </thead>
           <tbody>
