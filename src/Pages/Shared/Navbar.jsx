@@ -6,11 +6,10 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, loading, userSignOut } = use(AuthContext);
-  console.log(loading)
- if (loading)
- {
-  return <div>User Loading</div>
- }
+  console.log(loading);
+  if (loading) {
+    return <div>User Loading</div>;
+  }
   const handlerSignOut = () => {
     userSignOut()
       .then(() => {
@@ -25,14 +24,14 @@ const Navbar = () => {
       <NavLink to={"/"}>
         <li>Home</li>
       </NavLink>
-      <NavLink>
-        <li>All Jobs</li>
-      </NavLink>
-      <NavLink to={'/addJob'}>
+      <NavLink to={"/addJob"}>
         <li>Add Job</li>
       </NavLink>
-      <NavLink to={'/myApplications'}>
+      <NavLink to={"/myApplications"}>
         <li>My Applications</li>
+      </NavLink>
+      <NavLink to={'/myPostedJobs'}>
+        <li>My Posted Jobs</li>
       </NavLink>
     </>
   );
