@@ -14,6 +14,7 @@ const MyPostedJobsList = ({ myPostedJobPromise }) => {
               <th></th>
               <th>Job Title</th>
               <th>Deadline</th>
+              <th>count</th>
               <th>View Applications</th>
             </tr>
           </thead>
