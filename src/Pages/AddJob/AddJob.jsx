@@ -1,21 +1,58 @@
 import React from "react";
+import useAuth from "../../Hooks/useAuth";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddJob = () => {
-    const handleAddJob =(e)=>{
-        e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
-        const jobData = Object.fromEntries(formData.entries());
+  const { user } = useAuth();
 
-        console.log(jobData)
-    }
+  const handleAddJob = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const jobData = Object.fromEntries(formData.entries());
+
+    // Process salary range data
+    const { max, min, currency, ...newJobData } = jobData;
+    newJobData.salaryRange = {
+      max,
+      min,
+      currency,
+    };
+
+    //Process requirements
+    newJobData.requirements = newJobData.requirements
+      .split(",")
+      .map((req) => req.trim());
+
+    // Process Responsibilites
+    newJobData.responsibilities = newJobData.responsibilities
+      .split(",")
+      .map((req) => req.trim());
+    newJobData.status = "Active";
+
+    // Save job to the Database
+    axios
+      .post("http://localhost:5000/jobs", newJobData)
+      .then((res) => {
+        if (res.data.insertedId) {
+          toast.success("This new job has been saved and published");
+        }
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  };
   return (
     <div className="max-w-screen-2xl w-11/12 mx-auto my-10 place-items-center">
       <h2 className="text-center text-2xl md:text-4xl font-bold">
         Please Add Job
       </h2>
 
-      <form onSubmit={handleAddJob} className="**:focus:outline-none *:md:text-base">
+      <form
+        onSubmit={handleAddJob}
+        className="**:focus:outline-none *:md:text-base **:border-none"
+      >
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs md:w-md border p-4">
           <legend className="fieldset-legend">Basic Info</legend>
 
@@ -67,18 +104,21 @@ const AddJob = () => {
               className="btn"
               type="radio"
               name="jobType"
+              value="On-Site"
               aria-label="On-Site"
             />
             <input
               className="btn"
               type="radio"
               name="jobType"
+              value="Remote"
               aria-label="Remote"
             />
             <input
               className="btn"
               type="radio"
               name="jobType"
+              value="Hybrid"
               aria-label="Hybrid"
             />
           </div>
@@ -103,7 +143,7 @@ const AddJob = () => {
         {/* Application DeadLine  */}
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs md:w-md border p-4">
           <legend className="fieldset-legend">Application DeadLine</legend>
-          <input type="date" className="input w-full" />
+          <input type="date" name="deadline" className="input w-full" />
         </fieldset>
 
         {/* Salary Range */}
@@ -167,11 +207,11 @@ const AddJob = () => {
 
         {/* Job Responsibilites */}
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs md:w-md border p-4">
-          <legend className="fieldset-legend">Job Responsibilites</legend>
+          <legend className="fieldset-legend">Job responsibilities</legend>
           <textarea
-            name="responsibilites"
+            name="responsibilities"
             className="textarea w-full"
-            placeholder="Responsibilites (separate by comma)"
+            placeholder="responsibilities (separate by comma)"
           ></textarea>
         </fieldset>
 
@@ -190,12 +230,17 @@ const AddJob = () => {
           <input
             type="email"
             name="hr_email"
+            defaultValue={user.email}
             className="input w-full"
             placeholder="HR Email"
           />
         </fieldset>
 
-        <input type="submit" value="Add Job" className="btn btn-primary w-full my-3" />
+        <input
+          type="submit"
+          value="Add Job"
+          className="btn btn-primary w-full my-3"
+        />
       </form>
     </div>
   );

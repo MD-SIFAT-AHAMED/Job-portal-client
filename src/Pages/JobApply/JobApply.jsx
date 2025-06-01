@@ -38,7 +38,7 @@ const JobApply = () => {
       <h3 className="text-3xl my-5">Apply Job for </h3>
       <form
         onSubmit={handlerApplySubmit}
-        className="fieldset bg-base-200 border-base-300 rounded-box w-xs md:w-md border p-4 *:focus:outline-none *:text-black md:text-base *:border-none "
+        className="fieldset bg-base-200 border-base-300 rounded-box w-xs md:w-md border p-4 *:focus:outline-none md:text-base *:border-none "
       >
         <label className="label">LinkedIn Link</label>
         <input
