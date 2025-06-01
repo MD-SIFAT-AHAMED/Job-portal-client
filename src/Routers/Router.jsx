@@ -7,7 +7,8 @@ import ForgotPassword from "../Pages/Register/ForgotPassword";
 import JobDetails from "../Pages/Shared/JobDetails";
 import PrivateRoute from "../Routes/PrivateRoute";
 import JobApply from "../Pages/JobApply/JobApply";
-
+import MyApplicatons from "../Pages/MyApplications/MyApplicatons";
+import AddJob from "../Pages/AddJob/AddJob";
 
 const router = createBrowserRouter([
   {
@@ -19,31 +20,51 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path:'/register',
-        Component:Register
+        path: "/register",
+        Component: Register,
       },
       {
-        path:'/signIn',
-        Component:SignIn
-      }
-      ,
-      {
-        path:'/forgotPassword',
-        Component:ForgotPassword
+        path: "/signIn",
+        Component: SignIn,
       },
       {
-        path:'/jobDetails/:id',
-        loader:({params})=> fetch(`http://localhost:5000/jobs/${params.id}`),
-        element:<PrivateRoute>
-          <JobDetails/>
-        </PrivateRoute>
+        path: "/forgotPassword",
+        Component: ForgotPassword,
       },
       {
-        path:'/jobApply/:id',
-        element:<PrivateRoute>
-          <JobApply/>
-        </PrivateRoute>
-      }
+        path: "/jobDetails/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/jobs/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <JobDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/jobApply/:id",
+        element: (
+          <PrivateRoute>
+            <JobApply />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myApplications",
+        element: (
+          <PrivateRoute>
+            <MyApplicatons />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/addJob",
+        element: (
+          <PrivateRoute>
+            <AddJob />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

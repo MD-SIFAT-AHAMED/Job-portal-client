@@ -15,14 +15,16 @@ const JobApply = () => {
     const form = e.target;
     const formData = new FormData(form);
     const applyData = Object.fromEntries(formData.entries(formData));
+    applyData.applicant=user.email;
+    applyData.jobId=jobId;
     console.log(applyData);
     
-    axios.post('http://localhost:5000/application',applyData)
+    axios.post('http://localhost:5000/applications',applyData)
     .then(res => 
     {
       if(res.data.insertedId)
       {
-        toast.success("Apply Success");
+        toast.success("Apply Successfuly");
       }
     }
     )
