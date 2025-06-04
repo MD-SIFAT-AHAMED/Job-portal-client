@@ -8,7 +8,7 @@ const JobApply = () => {
 
   const { id: jobId } = useParams();
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
 
   const handlerApplySubmit = (e) => {
     e.preventDefault();
@@ -17,7 +17,7 @@ const JobApply = () => {
     const applyData = Object.fromEntries(formData.entries(formData));
     applyData.applicant=user.email;
     applyData.jobId=jobId;
-    console.log(applyData);
+    // console.log(applyData);
     
     axios.post('http://localhost:5000/applications',applyData)
     .then(res => 

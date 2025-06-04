@@ -3,10 +3,11 @@ import MyApplicationsStats from "./MyApplicationsStats";
 import MyApplicationsList from "./MyApplicationsList";
 import useAuth from "../../Hooks/useAuth";
 import Loading from "../Shared/Loading";
-import { myApplicationsPromise } from "../../Api/ApplicationsApi";
+import useApplicationApi from "../../Api/useApplicationApi";
 
 const MyApplicatons = () => {
   const { user } = useAuth();
+  const { myApplicationsPromise } = useApplicationApi();
   return (
     <div className="max-w-screen-2xl w-11/12 mx-auto place-items-center my-10 ">
       <MyApplicationsStats />

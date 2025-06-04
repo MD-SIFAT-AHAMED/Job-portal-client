@@ -6,10 +6,10 @@ import { useLoaderData, useParams } from "react-router";
 const ViewApplications = () => {
   const { job_id } = useParams();
   const applications = useLoaderData();
-  console.log(applications);
+  // console.log(applications);
 
   const handlerStatusChange = (e, applied_id) => {
-    console.log(e.target.value, applied_id);
+    // console.log(e.target.value, applied_id);
 
     axios
       .patch(`http://localhost:5000/applications/${applied_id}`, {

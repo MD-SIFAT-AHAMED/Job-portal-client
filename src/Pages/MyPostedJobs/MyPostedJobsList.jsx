@@ -3,7 +3,7 @@ import MypostedJobsRow from "./MypostedJobsRow";
 
 const MyPostedJobsList = ({ myPostedJobPromise }) => {
   const myPostedJobs = use(myPostedJobPromise);
-  console.log(myPostedJobs);
+  // console.log(myPostedJobs);
   return (
     <div >
       <div className="overflow-x-auto ">

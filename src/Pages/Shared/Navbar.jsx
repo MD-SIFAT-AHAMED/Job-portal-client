@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, loading, userSignOut } = use(AuthContext);
-  console.log(loading);
+  // console.log(loading);
   if (loading) {
     return <div>User Loading</div>;
   }
